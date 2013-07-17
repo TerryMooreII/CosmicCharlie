@@ -32,7 +32,7 @@
         options = [];
         options['force new connection'] = true;
         
-        socket = io.connect('http://localhost:8089', options);
+        socket = io.connect('http://localhost:8080', options);
         
         room = $('#newRoom').val();
         socket.emit('newRoom', room);

@@ -1,12 +1,12 @@
 var connect = require('connect');
 
-connect.createServer(
+var server = connect.createServer(
     connect.static(__dirname)
 ).listen(8080);
 console.log('Listening on port 8080');
 
 
-var io = require('socket.io').listen(8089,{origins: '*:*'});
+var io = require('socket.io').listen(server,{origins: '*:*'});
 
 io.sockets.on('connection', function(socket){
     var userList = [];
