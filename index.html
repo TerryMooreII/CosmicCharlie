@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 20px;
+                padding-bottom: 40px;
+            }
+            .no-list-style{
+                list-style: none;
+            }
+            h2{
+                font-size: 18px;
+                padding-left: 20px
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+
+        <div class="container">
+            <div>
+                <div class="pull-left">
+                    <h1 class="pull-left">Cosmic Charlie</h1>
+                    <h2 class="muted pull-left">How do you do?</h2>
+                </div>
+                <div class="form-inline pull-right" style="margin:20px">
+                    <label>Create Private Room</label>
+                    <input type="text" id="newRoom" class="input">
+                    <button id="newRoomBtn" class="btn btn-small">Private Room</button>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+            <div class="row">
+                <div class="span2 well">
+                    <h4 class="text-center muted">Who's Online</h4>
+                    <hr>
+                    <ul id="whos-online"  style="height:400px; overflow:auto" class="no-list-style">
+                    </ul>
+                </div>
+                <div class="span9 well">
+                    <ul id="messages" style="height:400px; overflow:auto"  class="no-list-style">
+                    </ul>
+                    <div class="inputs saywhat" style="padding-bottom:0">
+                        <div class=" text-center">
+                          <textarea placeholder="Talk to me Goose" class="span8" id="message" type="text"></textarea>
+                          <button id="send" class="btn" type="submit">Send!</button>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+           
+            <footer>
+                <p class=" text-center">
+                    &copy; TerryMooreII.com 2012 ::
+                    <span class="muted">Go on home your mama's callin' you</span>
+                </p>
+            </footer>
+        </div> <!-- /container -->
+        
+
+        <div class="modal hide fade" data-keyboard="false" data-backdrop="static" >
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Chat Handle</h3>
+          </div>
+          <div class="modal-body">
+            <p>
+                Enter a chat handle.
+                <input id="handle" type="text" class="span3" >
+            </p>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-primary">Start Chatting</a>
+          </div>
+        </div>
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+
+        <script src="js/main.js"></script>
+        <script src="js/socket.io.min.js"></script>
+
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
