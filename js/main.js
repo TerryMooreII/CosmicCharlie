@@ -1,20 +1,11 @@
 
 (function(){
-    var handle = 'anonymous';
+    var handle = localStorage.getItem('CosmicCharlie-handle');
     var socket = null;
     var room = 'main';
    
-    $('#newRoom').val(window.location.hash.substring(1))
+    $('#newRoom').val(window.location.hash.substring(1));
 
-    $('.modal').modal();
-    $('.modal a').on('click', function(){
-        var h = $('#handle').val();
-        if ( h != ''){
-            handle = h;
-            $('.modal').modal('hide'); 
-            establishConnection(handle);   
-        }
-    });
 
     $('#newRoomBtn').on('click', function(e){
         e.preventDefault;
@@ -46,6 +37,8 @@
         loadChatEvents();
         $('#messages').empty();
     }
+
+    
 
     var loadChatEvents = function(){
             
@@ -105,5 +98,24 @@
             socket.emit('leaving', data);
         }
     }
+    var init = function(){
+    	if (!handle){
+		    $('.modal').modal();
+		    $('.modal a').on('click', function(){
+		        var h = $('#handle').val();
+		        if ( h != ''){
+		            handle = h;
+		            $('.modal').modal('hide'); 
+		            localStorage.setItem('CosmicCharlie-handle', handle);
+		            establishConnection();   
+		        }
+		    });
+		}else{
+			console.log(handle);
+			establishConnection(); 
+		}	
+    }
+    
+    init();
 
 })();

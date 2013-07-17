@@ -30,7 +30,6 @@ io.sockets.on('connection', function(socket){
         socket.join(room);
     });
 
-
     socket.on('message', function(data){
         var message = {
             user: data.user,
