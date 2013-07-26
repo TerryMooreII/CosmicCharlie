@@ -23,7 +23,7 @@
         options = [];
         options['force new connection'] = true;
         
-        socket = io.connect('http://localhost:8080', options);
+        socket = io.connect('http://localhost:8081', options);
         
         room = $('#newRoom').val();
         socket.emit('newRoom', room);
@@ -48,11 +48,12 @@
             if (data.messageType === 'system'){
                 message = "<li style='padding:10px 0px'><span class='alert alert-info'>" + data.message + "</span></li>";
             }else{
-                message = "<li style='padding:5px'><strong>"+data.user+"</strong>: " + sanitze(data.message) + "</li>";
+                message = "<li style='padding:5px'><strong style='display:block;float:left; margin-top:8px'>"+data.user+":</strong> <span class='bubble'>" + sanitze(data.message) + "</span><div class='clearfix'></div></li>";
             }
             $('#messages').append(message)
             $('#messages').scrollTop($('#messages')[0].scrollHeight);
         });
+        
         socket.on('userList', function (data) {
             $('#whos-online').empty();
             $.each(data.users, function(k, handle){
@@ -107,15 +108,25 @@
 		            handle = h;
 		            $('.modal').modal('hide'); 
 		            localStorage.setItem('CosmicCharlie-handle', handle);
+                    $('#my-handle').text(handle);
 		            establishConnection();   
 		        }
 		    });
 		}else{
-			console.log(handle);
 			establishConnection(); 
+            $('#my-handle').text(handle);
 		}	
-    }
+            }
+
     
+    $('#my-handle').on('click', function(e){
+        e.preventDefault();
+        handle = null; 
+        socket.disconnect();
+        init();
+    });
+ 
+
     init();
 
 })();
