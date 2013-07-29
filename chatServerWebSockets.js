@@ -1,9 +1,10 @@
 var connect = require('connect');
+var port = 8081
 
 var server = connect.createServer(
     connect.static(__dirname)
-).listen(8081);
-console.log('Listening on port 8080');
+).listen(port);
+console.log('Listening on port ' + port);
 
 
 var io = require('socket.io').listen(server,{origins: '*:*'});
