@@ -21,6 +21,13 @@ io.sockets.on('connection', function(socket){
             message: data.user + " has joined the room",
             messageType: 'system'
         });
+
+        socket.to(socket.room).emit('message', {
+            user: "Node",
+            timestamp: new Date(),
+            message: 'Welcome to the ' + socket.room + ' room',
+            messageType: 'system'
+        });
         getUserList();      
     });
 

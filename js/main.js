@@ -15,7 +15,7 @@
         socket.emit('leaving', data);
         socket.disconnect();    
         establishConnection();
-        window.location.hash = $(this).val();
+       
     })
 
     var establishConnection = function(){
@@ -25,7 +25,9 @@
         
         socket = io.connect('http://localhost:8081', options);
         
-        room = $('#newRoom').val();
+        room = $('#newRoom').val() !== '' ? $('#newRoom').val() : 'main' ;
+        window.location.hash = room;
+        
         socket.emit('newRoom', room);
 
         var data = {
@@ -44,20 +46,43 @@
             
         // Log messages from the server
         socket.on('message', function (data) {
-            var message = '';
+            var message = [];
+            
             if (data.messageType === 'system'){
-                message = "<li style='padding:10px 0px'><span class='alert alert-info'>" + data.message + "</span></li>";
+                message = [
+                    '<li class="system-message alert alert-info text-center">',
+                        '<span>' + data.message + '</span>',
+                    '</li>'
+                ];
             }else{
-                message = "<li style='padding:5px'><strong style='display:block;float:left; margin-top:8px'>"+data.user+":</strong> <span class='bubble'>" + sanitze(data.message) + "</span><div class='clearfix'></div></li>";
+                pos = 'left';
+                if (data.user === handle){
+                    pos = 'right';
+                }
+                message = [
+                    '<li style="padding:5px">',
+                        '<strong style="display:block;float:' + pos + '; margin-top:8px">',
+                            data.user,
+                        '</strong>', 
+                        '<span class="bubble-' + pos + '">' + sanitze(data.message) + '</span>',
+                        '<div class="clearfix"></div>',
+                    '</li>'
+                ];
             }
-            $('#messages').append(message)
+            $('#messages').append(message.join(""))
             $('#messages').scrollTop($('#messages')[0].scrollHeight);
         });
         
         socket.on('userList', function (data) {
             $('#whos-online').empty();
             $.each(data.users, function(k, handle){
-                $('#whos-online').append('<li><i class="icon-user"></i><span style="padding:5px">'+handle+'</span></li>')    
+                var html = [
+                    '<li>',
+                        '<i class="icon-user"></i>',
+                        '<span style="padding:5px">'+handle+'</span>',
+                    '</li>'
+                ]
+                $('#whos-online').append(html.join(""))    
             });
             
         });
