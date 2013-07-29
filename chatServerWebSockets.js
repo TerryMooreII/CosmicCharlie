@@ -1,3 +1,4 @@
+var holla = require('holla');
 var connect = require('connect');
 var port = 8081
 
@@ -8,6 +9,8 @@ console.log('Listening on port ' + port);
 
 
 var io = require('socket.io').listen(server,{origins: '*:*'});
+var rtc = holla.createServer(server);
+
 
 io.sockets.on('connection', function(socket){
     var userList = [];

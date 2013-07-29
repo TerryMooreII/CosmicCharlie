@@ -3,7 +3,8 @@
     var handle = localStorage.getItem('CosmicCharlie-handle');
     var socket = null;
     var room = 'main';
-   
+    var socketServer = window.location.origin;
+
     $('#newRoom').val(window.location.hash.substring(1));
 
 
@@ -23,7 +24,7 @@
         options = [];
         options['force new connection'] = true;
         
-        socket = io.connect('http://localhost:8081', options);
+        socket = io.connect(socketServer, options);
         
         room = $('#newRoom').val() !== '' ? $('#newRoom').val() : 'main' ;
         window.location.hash = room;
@@ -79,7 +80,7 @@
                 var html = [
                     '<li>',
                         '<i class="icon-user"></i>',
-                        '<span style="padding:5px">'+handle+'</span>',
+                        '<span style="padding:5px">'+handle+'</span><i class="icon-magnet"></i>',
                     '</li>'
                 ]
                 $('#whos-online').append(html.join(""))    
@@ -150,7 +151,58 @@
         socket.disconnect();
         init();
     });
+    
+
+   
+    var server = holla.createClient({debug:true});
+
+     holla.createFullStream(function(err, stream) {
+       //if (err) console.log( err);
+
+       holla.pipe(stream, $(".me"));
+
+      // accept inbound
+      server.register(handle, function(worked) {
+        server.on("call", function(call) {
+          console.log("Inbound call", call);
+
+          call.addStream(stream);
+          call.answer();
+
+          call.ready(function(stream) {
+            holla.pipe(stream, $(".them"));
+          });
+          call.on("hangup", function() {
+            $(".them").attr('src', '');
+          });
+          $("#hangup").click(function(){
+            call.end();
+          });
+        });
+
+        //place outbound
+        $('.icon-magnet').on('click', function () {
+          var toCall = $(this).prev('span').text();
+            console.log('Going to call: ' + toCall);
+
+          var call = server.call(toCall);
+          call.addStream(stream);
+          call.ready(function(stream) {
+            holla.pipe(stream, $(".them"));
+          });
+          call.on("hangup", function() {
+            $(".them").attr('src', '');
+          });
+          $("#hangup").click(function(){
+            call.end();
+          });
+        });
+
+       });
+    });
+
  
+
 
     init();
 
