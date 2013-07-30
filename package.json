@@ -1,0 +1,16 @@
+{
+  "name": "Cosmic Charlie",
+  "description": "Multi-user, multi-room chat application that also support WebRTC",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "connect": "*",
+    "holla": "*",
+    "socket.io": "*"
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "start":"node chatServerWebSockets.js"
+  }
+} 
