@@ -44,6 +44,7 @@
 	-webkit-border-radius: 7px;
 	-moz-border-radius: 7px;
 	border-radius: 7px;
+	text-align:right;
 }
 
 .bubble-right:after 
@@ -81,6 +82,17 @@ z-index: 1;
 }
 
 
+
+.them{
+	width:530px;
+	height:380px;
+}
+.me{
+	position:absolute;
+	height:80px;
+	bottom:40px;
+	right:40px;
+}
 
 
 

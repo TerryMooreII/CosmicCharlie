@@ -69,13 +69,7 @@
                 </div>
             
             </div>
-           <div>
-                Video Stuff
-                <div class="video-container">
-                  <video class="them" autoplay="true"></video>
-                  <video class="me rtc-pip" autoplay="true" muted="true"></video>
-                </div>
-            </div>
+          
             <footer>
                 <p class=" text-center">
                     &copy; TerryMooreII.com 2012 ::
@@ -84,8 +78,25 @@
             </footer>
         </div> <!-- /container -->
         
+        <div id="modal-rtc" class="modal hide fade" data-keyboard="false" data-backdrop="static" >
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Calling</h3>
+            </div>
+            <div class="modal-body">
+                <div class="video-container">
+                    <video class="them" autoplay="true"></video>
+                    <video class="me rtc-pip" autoplay="true" muted="true"></video>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary">Hang Up</a>
+            </div>
+        </div>
 
-        <div class="modal hide fade" data-keyboard="false" data-backdrop="static" >
+
+
+        <div id="modal-handle" class="modal hide fade" data-keyboard="false" data-backdrop="static" >
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h3>Chat Handle</h3>
