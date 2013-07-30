@@ -46,7 +46,7 @@
 	border-radius: 7px;
 	text-align:right;
 }
-
+vis
 .bubble-right:after 
 {
 content: "";
@@ -72,7 +72,7 @@ z-index: 1;
 	overflow:auto;
 }
 
-.chat-window{
+/*.chat-window{
 	height:400px; 
 	
 }
@@ -80,7 +80,7 @@ z-index: 1;
 .whos-online-window{
 	height:390px; 
 }
-
+*/
 
 
 .them{

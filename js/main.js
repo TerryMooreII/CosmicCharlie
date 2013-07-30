@@ -5,6 +5,19 @@
     var defaultRoomName = 'main';
     var socketServer = window.location.origin;
 
+
+    var setHeight = function(){
+        var header = $('#header').outerHeight(true);
+        var footer = $('footer').outerHeight(true);
+        var windowHeight = $(window).height();
+        var height = windowHeight - footer - header - 170;
+        $('.whos-online-window').height(height - 10)
+        $('.chat-window').height(height);
+    };
+
+    $(window).on('resize', setHeight);
+    
+
     $('#newRoomBtn').on('click', function(e){
         e.preventDefault();
         var data = {
@@ -123,7 +136,7 @@
 
     var init = function(){
         $('#newRoom').val(window.location.hash.substring(1));
-
+        setHeight();
     	if (!handle){
 		    $('#modal-handle').modal();
 		    $('#modal-handle a').on('click', function(){
