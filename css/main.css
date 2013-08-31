@@ -3,7 +3,17 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-
+body {
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+.no-list-style{
+    list-style: none;
+}
+h2{
+    font-size: 18px;
+    padding-left: 20px
+}
 
 .bubble-left {
 	display:block;
