@@ -40,11 +40,11 @@
                 <div class="span2 well">
                     <h4 class="text-center muted">Who's Online</h4>
                     <hr>
-                    <ul id="whos-online"  class="no-list-style window whos-online-window">
+                    <ul id="whos-online" class="no-list-style window whos-online-window">
                     </ul>
                 </div>
                 <div class="span9 well">
-                    <ul id="messages"  class="no-list-style window chat-window">
+                    <ul id="messages" class="no-list-style window chat-window">
                     </ul>
                     <div class="inputs saywhat" style="padding-bottom:0">
                         <div class=" text-center">
@@ -62,9 +62,10 @@
             </footer>
         </div> <!-- /container -->
         
+        <!--  Video Chat Modal -->
         <div id="modal-rtc" class="modal hide fade" data-keyboard="false" data-backdrop="static" >
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
                 <h3>Calling</h3>
             </div>
             <div class="modal-body">
@@ -74,12 +75,11 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn btn-primary">Hang Up</a>
+                <a href="#" class="btn btn-primary" id="hangup">Hang Up</a>
             </div>
         </div>
-
-
-
+        
+        <!--  Set Chat Handle Modal -->
         <div id="modal-handle" class="modal hide fade" data-keyboard="false" data-backdrop="static" >
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -96,13 +96,9 @@
           </div>
         </div>
 
-
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-
         <script src="js/vendor/bootstrap.min.js"></script>
-
-        
         <script src="js/socket.io.min.js"></script>
         <script src="node_modules/holla/holla.js"></script>    
         <script src="js/main.js"></script>

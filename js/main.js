@@ -15,10 +15,7 @@
         $('.chat-window').height(height);
     };
 
-    $(window).on('resize', setHeight);
-    
-
-    $('#newRoomBtn').on('click', function(e){
+    var newRoom = function(e){
         e.preventDefault();
         var data = {
             user: handle
@@ -27,7 +24,11 @@
         socket.disconnect();    
         establishConnection();
        
-    });
+    };
+
+    $(window).on('resize', setHeight);
+    
+    $('#newRoomBtn').on('click', newRoom);
 
     var establishConnection = function(){
         socket = null;
@@ -155,67 +156,71 @@
 		}	
     };
 
-    
-    $('#my-handle').on('click', function(e){
+    var setHandle = function(e){
         e.preventDefault();
         handle = null; 
         socket.disconnect();
         init();
-    });
-    
+    };
 
-   
+    $('#my-handle').on('click', setHandle);
+    
     var server = holla.createClient({debug:true});
 
-     holla.createFullStream(function(err, stream) {
-       if (err) console.log( err);
+    holla.createFullStream(function(err, stream) {
+        if (err) console.log(err);
 
-       holla.pipe(stream, $(".me"));
+        holla.pipe(stream, $(".me"));
 
-      // accept inbound
-      server.register(handle, function(worked) {
-        server.on("call", function(call) {
-          console.log("Inbound call", call);
-          $('#modal-rtc').modal();
+        // accept inbound
+        server.register(handle, function(worked) {
 
-          call.addStream(stream);
-          call.answer();
+            server.on("call", function(call) {
+                console.log("Inbound call", call);
+                $('#modal-rtc').modal();
 
-          call.ready(function(stream) {
-            holla.pipe(stream, $(".them"));
-          });
-          call.on("hangup", function() {
-            $(".them").attr('src', '');
-          });
-          $("#hangup").click(function(){
-            call.end();
-          });
+                call.addStream(stream);
+                call.answer();
+
+                call.ready(function(stream) {
+                    holla.pipe(stream, $(".them"));
+                });
+                call.on("hangup", function() {
+                    $(".them").attr('src', '');
+                    console.log('onHangup')
+                });
+            $("#hangup").click(function(){
+                $('#modal-rtc').modal('hide');
+                call.end();
+            });
         });
 
         //place outbound
         $('.icon-magnet').on('click', function () {
-          var toCall = $(this).prev('span').text();
-          console.log('Going to call: ' + toCall);
-          $('#modal-rtc').modal();
+            var toCall = $(this).prev('span').text();
+            
+            console.log('Going to call: ' + toCall);
+            $('#modal-rtc').modal();
 
-          var call = server.call(toCall);
-          call.addStream(stream);
-          call.ready(function(stream) {
-            holla.pipe(stream, $(".them"));
-          });
-          call.on("hangup", function() {
-            $(".them").attr('src', '');
-          });
-          $("#hangup").click(function(){
-            call.end();
-          });
+            var call = server.call(toCall);
+            call.addStream(stream);
+
+            call.ready(function(stream) {
+                holla.pipe(stream, $(".them"));
+            });
+            call.on("hangup", function() {
+                $(".them").attr('src', '');
+                console.log('onHangup')
+            });
+            $("#hangup").click(function(){
+                call.end();
+                $('#modal-rtc').modal('hide');
+                
+            });
         });
 
        });
     });
-
- 
-
 
     init();
 

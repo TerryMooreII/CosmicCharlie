@@ -1,5 +1,5 @@
 {
-  "name": "Cosmic Charlie",
+  "name": "CosmicCharlie",
   "description": "Multi-user, multi-room chat application that also support WebRTC",
   "version": "0.0.1",
   "private": true,
