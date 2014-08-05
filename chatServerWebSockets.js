@@ -1,6 +1,6 @@
 var holla = require('holla');
 var connect = require('connect');
-var port = 8081
+var port =  Number(process.env.PORT || 5000);
 
 var server = connect.createServer(
     connect.static(__dirname)
